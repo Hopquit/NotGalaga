@@ -5,10 +5,8 @@ using UnityEngine;
 public class AlienBullet : MonoBehaviour
 {
     public float speed = 6;
-
     public float maxLife = 4;
     float currentLife;
-
 
     // Start is called before the first frame update
     void Start()
@@ -27,15 +25,8 @@ public class AlienBullet : MonoBehaviour
         currentLife -= Time.deltaTime;
     }
 
-    void OnTriggerEnter(Collider other) {
-        Debug.Log(other);
-    }
-    void OnCollisionEnter(Collision other)
+    void OnTriggerEnter(Collider other) 
     {
-        Debug.Log(other);
-        if (other.collider.tag == "AlienBullet")
-        {
-            Destroy(other.gameObject);
-        }
+        Debug.Log("Hello!");
     }
 }

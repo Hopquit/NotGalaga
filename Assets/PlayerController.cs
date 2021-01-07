@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public int maxHealth = 4;
+    int currentHealth;
     public float speed = 2.0f;
     public Transform prefab;
 
     public float secondsPerBullet = 0.25f;
     float cooldown = 0;
     SpriteRenderer sprite;
+    float invincibility = 0;
+    public float maxInvincibility = 1;
+    bool hasDamageSource = false;
     // Start is called before the first frame update
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -30,6 +36,15 @@ public class PlayerController : MonoBehaviour
         }
 
         cooldown -= Time.deltaTime;
+        if (currentHealth <= 0)
+        {
+            Destroy (gameObject);
+        }
+        invincibility -= Time.deltaTime;
+        if (invincibility <= 0 && hasDamageSource)
+        {
+            currentHealth -= 1;
+        }
     }
     void LateUpdate()
     {
@@ -53,7 +68,25 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    void OnTriggerEnter(Collider other) {
-        Debug.Log(other);
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "AlienBullet")
+        {
+            Destroy(other.gameObject);
+            currentHealth -= 1;
+        }
+        else if (other.tag == "Alien1")
+        {
+            currentHealth -= 1;
+            invincibility = maxInvincibility;
+            hasDamageSource = true;
+        }
+    }
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.tag == "Alien1")
+        {
+            hasDamageSource = false;
+        }
     }
 }

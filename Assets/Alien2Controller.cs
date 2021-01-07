@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Alien2Controller : MonoBehaviour
 {
+    public float secondsPerBullet = 0.25f;
+    float cooldown = 0;
     float direction = 1;
     public float speed = 4;
     SpriteRenderer sprite;
+    public Transform prefab;
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
@@ -16,6 +19,12 @@ public class Alien2Controller : MonoBehaviour
     void Update()
     {
         transform.Translate(speed * direction * Time.deltaTime, 0, 0);
+        if (cooldown <= 0)
+        {
+            Instantiate(prefab, transform.position, Quaternion.identity);
+            cooldown = secondsPerBullet;
+        }
+        cooldown -= Time.deltaTime;
     }
     void LateUpdate()
     {
@@ -35,5 +44,10 @@ public class Alien2Controller : MonoBehaviour
             direction = 1;
         }
         transform.position = newPosition;
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("other");
     }
 }
