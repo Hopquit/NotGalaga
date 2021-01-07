@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public float speed = 2.0f;
     public Transform prefab;
 
+    public Transform explosion;
+
     public float secondsPerBullet = 0.25f;
     float cooldown = 0;
     SpriteRenderer sprite;
@@ -38,12 +40,14 @@ public class PlayerController : MonoBehaviour
         cooldown -= Time.deltaTime;
         if (currentHealth <= 0)
         {
+            Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy (gameObject);
         }
         invincibility -= Time.deltaTime;
         if (invincibility <= 0 && hasDamageSource)
         {
             currentHealth -= 1;
+            EventBus.TriggerEvent("PlayerHealthChanged");
         }
     }
     void LateUpdate()
@@ -74,10 +78,12 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(other.gameObject);
             currentHealth -= 1;
+            EventBus.TriggerEvent("PlayerHealthChanged");
         }
         else if (other.tag == "Alien1")
         {
             currentHealth -= 1;
+            EventBus.TriggerEvent("PlayerHealthChanged");
             invincibility = maxInvincibility;
             hasDamageSource = true;
         }
@@ -89,4 +95,5 @@ public class PlayerController : MonoBehaviour
             hasDamageSource = false;
         }
     }
+    
 }

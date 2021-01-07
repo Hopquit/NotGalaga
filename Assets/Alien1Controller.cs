@@ -10,7 +10,7 @@ public class Alien1Controller : MonoBehaviour
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
-        player = GameObject.Find("Ship");
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -34,5 +34,13 @@ public class Alien1Controller : MonoBehaviour
         newPosition.y = Mathf.Clamp(newPosition.y, yMin, yMax);
         
         transform.position = newPosition;
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "PlayerBullet")
+        {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+        }
     }
 }

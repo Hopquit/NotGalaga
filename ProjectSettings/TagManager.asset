@@ -6,6 +6,7 @@ TagManager:
   tags:
   - AlienBullet
   - Alien1
+  - PlayerBullet
   layers:
   - Default
   - TransparentFX

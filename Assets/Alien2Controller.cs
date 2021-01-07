@@ -48,6 +48,10 @@ public class Alien2Controller : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("other");
+        if (other.tag == "PlayerBullet")
+        {
+            Destroy(other.gameObject);
+            Destroy(gameObject);
+        }
     }
 }
