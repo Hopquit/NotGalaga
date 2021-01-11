@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,13 +16,15 @@ public class PlayerController : MonoBehaviour
     float cooldown = 0;
     SpriteRenderer sprite;
     float invincibility = 0;
-    public float maxInvincibility = 1;
+    public float maxInvincibility = 1.5f;
     bool hasDamageSource = false;
+    public TMP_Text healthText;
     // Start is called before the first frame update
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
         currentHealth = maxHealth;
+        healthText.text = "Health: " + currentHealth;
     }
 
     // Update is called once per frame
@@ -42,12 +45,16 @@ public class PlayerController : MonoBehaviour
         {
             Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy (gameObject);
+            EventBus.TriggerEvent("PlayerDied");
         }
         invincibility -= Time.deltaTime;
         if (invincibility <= 0 && hasDamageSource)
         {
+            invincibility = maxInvincibility;
             currentHealth -= 1;
-            EventBus.TriggerEvent("PlayerHealthChanged");
+            // EventBus.TriggerEvent("PlayerHealthChanged");
+
+            healthText.text = "Health: " + currentHealth;
         }
     }
     void LateUpdate()
@@ -78,12 +85,16 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(other.gameObject);
             currentHealth -= 1;
-            EventBus.TriggerEvent("PlayerHealthChanged");
+            // EventBus.TriggerEvent("PlayerHealthChanged");
+
+            healthText.text = "Health: " + currentHealth;
         }
         else if (other.tag == "Alien1")
         {
             currentHealth -= 1;
-            EventBus.TriggerEvent("PlayerHealthChanged");
+            // EventBus.TriggerEvent("PlayerHealthChanged");
+
+            healthText.text = "Health: " + currentHealth;
             invincibility = maxInvincibility;
             hasDamageSource = true;
         }

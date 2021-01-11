@@ -41,6 +41,7 @@ public class Alien1Controller : MonoBehaviour
         {
             Destroy(other.gameObject);
             Destroy(gameObject);
+            EventBus.TriggerEvent("AlienDied");
         }
     }
 }
