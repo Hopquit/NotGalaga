@@ -46,13 +46,4 @@ public class Alien2Controller : MonoBehaviour
         transform.position = newPosition;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "PlayerBullet")
-        {
-            Destroy(other.gameObject);
-            Destroy(gameObject);
-            EventBus.TriggerEvent("AlienDied");
-        }
-    }
 }
