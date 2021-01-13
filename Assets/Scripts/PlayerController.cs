@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
 
             healthText.text = "Health: " + currentHealth;
         }
-        else if (other.tag == "Alien1")
+        else if (other.tag == "Alien1" || other.tag == "Laser")
         {
             currentHealth -= 1;
             // EventBus.TriggerEvent("PlayerHealthChanged");
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Alien1")
+        if (other.tag == "Alien1" || other.tag == "Laser")
         {
             hasDamageSource = false;
         }
