@@ -1063,7 +1063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 5
-  speed: 5
+  speed: 7
   prefab: {fileID: 834933845641265819, guid: 8b65948ca6a602448a5218387b4a550f, type: 3}
   explosion: {fileID: 3569360169364210961, guid: 5a7c36734cb55ae48a1e1f290f71adb3,
     type: 3}
