@@ -62,7 +62,7 @@ public class BossController : MonoBehaviour
                 laserCooldown -= Time.deltaTime;
                 break;
             case State.Lasering:
-                Instantiate(laser);
+                Instantiate(laser, this.transform, true);
                 state = State.Firing;
                 break;
         }

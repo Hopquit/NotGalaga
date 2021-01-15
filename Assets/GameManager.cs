@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
-    public TMP_Text gameOverText;
+    public GameObject gameOverText;
     public float spawnDelay = 3;
     float spawnDelayCooldown;
     public Transform[] aliens;
@@ -19,7 +20,7 @@ public class GameManager : MonoBehaviour
     bool shouldSpawnEnemy = true;
     void Start()
     {
-        gameOverText.enabled = false;
+        gameOverText.SetActive(false);
         scoreText.text = "Score: " + score;
         spawnDelayCooldown = spawnDelay;
         spawnBossDelayCooldown = spawnBossDelay;
@@ -49,7 +50,7 @@ public class GameManager : MonoBehaviour
     }
     void OnPlayerDied()
     {
-        gameOverText.enabled = true;
+        gameOverText.SetActive(true);
         shouldSpawnEnemy = false;
     }
     void OnAlienDied()
@@ -80,4 +81,12 @@ public class GameManager : MonoBehaviour
         BossController controller = Instantiate<BossController>(boss);
         controller.SetBossDestination(bossSpawnpoint);
     }
+    public void ChangeScene()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
+    } 
 }

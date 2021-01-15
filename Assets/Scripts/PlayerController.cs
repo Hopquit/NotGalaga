@@ -98,6 +98,12 @@ public class PlayerController : MonoBehaviour
             invincibility = maxInvincibility;
             hasDamageSource = true;
         }
+        else if (other.tag == "MedicDrop")
+        {
+            Destroy(other.gameObject);
+            currentHealth += 1;
+            healthText.text = "Health: " + currentHealth;
+        }
     }
     void OnTriggerExit2D(Collider2D other)
     {
