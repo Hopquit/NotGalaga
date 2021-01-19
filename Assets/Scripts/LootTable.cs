@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class LootTable : MonoBehaviour
 {
-    public Transform [] drops;
+    public LootTableScriptableObject drops;
     
-    public Transform Loot(float chance)
+    public Transform Loot()
     {
-        if (Random.value >= chance)
+        if (Random.value <= drops.chance)
         {
-            var index = Random.Range(0, drops.Length);
-            return drops[index];
+            var index = Random.Range(0, drops.loot.Length);
+            return drops.loot[index];
         }
         else
         {
@@ -20,9 +20,10 @@ public class LootTable : MonoBehaviour
     }
     void OnDestroy()
     {
-        var drop = Loot(0.2f);
+        var drop = Loot();
         if (drop != null)
         {
+            drop.position = transform.position;
             Instantiate(drop, transform.position, Quaternion.identity);
         }
     }

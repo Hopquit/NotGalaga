@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public float spawnBossDelay = 20;
     float spawnBossDelayCooldown;
     public Transform bossSpawnpoint;
-
+    public Transform hitSound;
     bool shouldSpawnEnemy = true;
     void Start()
     {
@@ -47,11 +47,16 @@ public class GameManager : MonoBehaviour
         EventBus.StartListening("PlayerDied", OnPlayerDied);
         EventBus.StartListening("AlienDied", OnAlienDied);
         EventBus.StartListening("BossDied", OnBossDied);
+        EventBus.StartListening("PlayerHit", OnPlayerHit);
     }
     void OnPlayerDied()
     {
         gameOverText.SetActive(true);
         shouldSpawnEnemy = false;
+    }
+    void OnPlayerHit()
+    {
+        Instantiate (hitSound);
     }
     void OnAlienDied()
     {
@@ -68,6 +73,7 @@ public class GameManager : MonoBehaviour
         EventBus.StopListening("PlayerDied", OnPlayerDied);
         EventBus.StopListening("AlienDied", OnAlienDied);
         EventBus.StopListening("BossDied", OnBossDied);
+        EventBus.StopListening("PlayerHit", OnPlayerHit);
     }
     void Spawn()
     {

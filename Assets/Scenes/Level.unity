@@ -982,6 +982,8 @@ MonoBehaviour:
   alienSpawnpoint: {fileID: 1027221375}
   spawnBossDelay: 20
   bossSpawnpoint: {fileID: 870793061}
+  hitSound: {fileID: 3602036834198021063, guid: cd4f5fd6bff011a4396f362b0c567f6c,
+    type: 3}
 --- !u!4 &946305016
 Transform:
   m_ObjectHideFlags: 0
@@ -1430,6 +1432,8 @@ MonoBehaviour:
   secondsPerBullet: 0.25
   maxInvincibility: 1
   healthText: {fileID: 970360766}
+  pickupSound: {fileID: 1122533938603923333, guid: 656e00eb10d62644c8db7a37ce36e420,
+    type: 3}
 --- !u!61 &1504997960
 BoxCollider2D:
   m_ObjectHideFlags: 0

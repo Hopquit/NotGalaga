@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public float maxInvincibility = 1.5f;
     bool hasDamageSource = false;
     public TMP_Text healthText;
+    public Transform pickupSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,7 +53,7 @@ public class PlayerController : MonoBehaviour
         {
             invincibility = maxInvincibility;
             currentHealth -= 1;
-            // EventBus.TriggerEvent("PlayerHealthChanged");
+            EventBus.TriggerEvent("PlayerHit");
 
             healthText.text = "Health: " + currentHealth;
         }
@@ -85,14 +86,14 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(other.gameObject);
             currentHealth -= 1;
-            // EventBus.TriggerEvent("PlayerHealthChanged");
+            EventBus.TriggerEvent("PlayerHit");
 
             healthText.text = "Health: " + currentHealth;
         }
         else if (other.tag == "Alien1" || other.tag == "Laser")
         {
             currentHealth -= 1;
-            // EventBus.TriggerEvent("PlayerHealthChanged");
+            EventBus.TriggerEvent("PlayerHit");
 
             healthText.text = "Health: " + currentHealth;
             invincibility = maxInvincibility;
@@ -102,6 +103,7 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(other.gameObject);
             currentHealth += 1;
+            Instantiate (pickupSound);
             healthText.text = "Health: " + currentHealth;
         }
     }
