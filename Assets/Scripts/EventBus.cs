@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+public class SimpleEvent : UnityEvent<GameObject>
+{
+
+}
 public class EventBus : MonoBehaviour
 {
-    private Dictionary <string, UnityEvent> eventDictionary;
+    private Dictionary <string, SimpleEvent> eventDictionary;
     private static EventBus eventManager;
     public static EventBus instance
     {
@@ -30,38 +34,38 @@ public class EventBus : MonoBehaviour
     {
         if (eventDictionary == null)
         {
-            eventDictionary = new Dictionary<string, UnityEvent>();
+            eventDictionary = new Dictionary<string, SimpleEvent>();
         }
     }
-    public static void StartListening (string eventName, UnityAction listener) {
-        UnityEvent thisEvent = null;
+    public static void StartListening (string eventName, UnityAction<GameObject> listener) {
+        SimpleEvent thisEvent = null;
         if (instance.eventDictionary.TryGetValue (eventName, out thisEvent))
         {
             thisEvent.AddListener (listener);
         }
         else{
-            thisEvent = new UnityEvent ();
+            thisEvent = new SimpleEvent ();
             thisEvent.AddListener (listener);
             instance.eventDictionary.Add (eventName, thisEvent);
         }
         
     }
-    public static void StopListening (string eventName, UnityAction listener)
+    public static void StopListening (string eventName, UnityAction<GameObject> listener)
     {
         if (eventManager == null) return;
-        UnityEvent thisEvent = null;
+        SimpleEvent thisEvent = null;
         if (instance.eventDictionary.TryGetValue (eventName, out thisEvent))
         {
             thisEvent.RemoveListener (listener);
         }
     }
 
-    public static void TriggerEvent (string eventName)
+    public static void TriggerEvent (string eventName, GameObject data = null)
     {
-        UnityEvent thisEvent = null;
+        SimpleEvent thisEvent = null;
         if (instance.eventDictionary.TryGetValue (eventName, out thisEvent))
         {
-            thisEvent.Invoke ();
+            thisEvent.Invoke (data);
         }
     }
 }

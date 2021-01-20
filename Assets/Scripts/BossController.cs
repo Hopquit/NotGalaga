@@ -70,7 +70,7 @@ public class BossController : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "PlayerBullet")
+        if (other.tag == "PlayerBullet" && state == State.Firing)
         {
             Destroy(other.gameObject);
             currentHealth -= 1;

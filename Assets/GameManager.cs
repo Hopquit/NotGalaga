@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public Transform bossSpawnpoint;
     public Transform hitSound;
     bool shouldSpawnEnemy = true;
+    public LootTableScriptableObject loot;
     void Start()
     {
         gameOverText.SetActive(false);
@@ -49,21 +50,26 @@ public class GameManager : MonoBehaviour
         EventBus.StartListening("BossDied", OnBossDied);
         EventBus.StartListening("PlayerHit", OnPlayerHit);
     }
-    void OnPlayerDied()
+    void OnPlayerDied(GameObject data)
     {
         gameOverText.SetActive(true);
         shouldSpawnEnemy = false;
     }
-    void OnPlayerHit()
+    void OnPlayerHit(GameObject data)
     {
         Instantiate (hitSound);
     }
-    void OnAlienDied()
+    void OnAlienDied(GameObject data)
     {
         score += 1;
         scoreText.text = "Score: " + score;
+        var drop = loot.RandomDrop();
+        if (drop == null)
+        {
+            Instantiate (drop, data.transform.position, Quaternion.identity);
+        }
     }
-    void OnBossDied()
+    void OnBossDied(GameObject data)
     {
         score += 50;
         scoreText.text = "Score: " + score;

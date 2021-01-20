@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 3651718759541030466}
   - component: {fileID: 3651718759541030477}
   - component: {fileID: -2560184491812708989}
-  - component: {fileID: 2570891561456933042}
   m_Layer: 0
   m_Name: GreenAlien
   m_TagString: Alien1
@@ -161,16 +160,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 3569360169364210961, guid: 5a7c36734cb55ae48a1e1f290f71adb3,
     type: 3}
---- !u!114 &2570891561456933042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3651718759541030473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 051ddd7749b7d0544b7e7d6348685f83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drops: {fileID: 11400000, guid: e0fa9c5e6ff4b004f9ebf025b6370cff, type: 2}
