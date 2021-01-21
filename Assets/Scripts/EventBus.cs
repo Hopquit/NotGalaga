@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class SimpleEvent : UnityEvent<GameObject>
+public class SimpleEvent : UnityEvent<Transform>
 {
 
 }
@@ -37,7 +37,7 @@ public class EventBus : MonoBehaviour
             eventDictionary = new Dictionary<string, SimpleEvent>();
         }
     }
-    public static void StartListening (string eventName, UnityAction<GameObject> listener) {
+    public static void StartListening (string eventName, UnityAction<Transform> listener) {
         SimpleEvent thisEvent = null;
         if (instance.eventDictionary.TryGetValue (eventName, out thisEvent))
         {
@@ -50,7 +50,7 @@ public class EventBus : MonoBehaviour
         }
         
     }
-    public static void StopListening (string eventName, UnityAction<GameObject> listener)
+    public static void StopListening (string eventName, UnityAction<Transform> listener)
     {
         if (eventManager == null) return;
         SimpleEvent thisEvent = null;
@@ -60,7 +60,7 @@ public class EventBus : MonoBehaviour
         }
     }
 
-    public static void TriggerEvent (string eventName, GameObject data = null)
+    public static void TriggerEvent (string eventName, Transform data = null)
     {
         SimpleEvent thisEvent = null;
         if (instance.eventDictionary.TryGetValue (eventName, out thisEvent))

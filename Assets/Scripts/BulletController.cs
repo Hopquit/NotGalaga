@@ -14,6 +14,7 @@ public class BulletController : MonoBehaviour
     void Start()
     {
         currentLife = maxLife;
+        GetComponent<AudioSource>().volume *= PlayerPrefs.GetFloat("volume");
     }
 
     // Update is called once per frame

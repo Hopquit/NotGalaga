@@ -16,10 +16,13 @@ public class Alien1Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction;
-        direction = player.transform.position - transform.position;
-        direction.Normalize();
-        transform.Translate(speed * direction * Time.deltaTime);
+        if (player != null)
+        {
+            Vector3 direction;
+            direction = player.transform.position - transform.position;
+            direction.Normalize();
+            transform.Translate(speed * direction * Time.deltaTime);
+        }
     }
     void LateUpdate()
     {
@@ -32,8 +35,8 @@ public class Alien1Controller : MonoBehaviour
         float yMin = -yBounds + sprite.bounds.size.y / 2;
         newPosition.x = Mathf.Clamp(newPosition.x, xMin, xMax);
         newPosition.y = Mathf.Clamp(newPosition.y, yMin, yMax);
-        
+
         transform.position = newPosition;
     }
-   
+
 }

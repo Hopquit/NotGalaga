@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         currentHealth = maxHealth;
         healthText.text = "Health: " + currentHealth;
+        pickupSound.GetComponent<AudioSource>().volume *= PlayerPrefs.GetFloat("volume");
     }
 
     // Update is called once per frame

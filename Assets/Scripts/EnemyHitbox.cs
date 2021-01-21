@@ -11,7 +11,7 @@ public class EnemyHitbox : MonoBehaviour
         {
             Destroy(other.gameObject);
             Destroy(gameObject);
-            EventBus.TriggerEvent("AlienDied");
+            EventBus.TriggerEvent("AlienDied", transform);
             Instantiate(explosion, transform.position, Quaternion.identity);
         }
     }

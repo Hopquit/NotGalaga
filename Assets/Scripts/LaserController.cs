@@ -9,6 +9,7 @@ public class LaserController : MonoBehaviour
     void Start()
     {
         despawnTime = maxDespawnTime;
+        GetComponent<AudioSource>().volume *= PlayerPrefs.GetFloat("volume");
     }
 
     

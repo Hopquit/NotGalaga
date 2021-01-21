@@ -984,6 +984,7 @@ MonoBehaviour:
   bossSpawnpoint: {fileID: 870793061}
   hitSound: {fileID: 3602036834198021063, guid: cd4f5fd6bff011a4396f362b0c567f6c,
     type: 3}
+  loot: {fileID: 11400000, guid: e0fa9c5e6ff4b004f9ebf025b6370cff, type: 2}
 --- !u!4 &946305016
 Transform:
   m_ObjectHideFlags: 0

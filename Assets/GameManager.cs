@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Score: " + score;
         spawnDelayCooldown = spawnDelay;
         spawnBossDelayCooldown = spawnBossDelay;
+        hitSound.GetComponent<AudioSource>().volume *= PlayerPrefs.GetFloat("volume", 0.5f);
     }
 
 
@@ -50,26 +51,26 @@ public class GameManager : MonoBehaviour
         EventBus.StartListening("BossDied", OnBossDied);
         EventBus.StartListening("PlayerHit", OnPlayerHit);
     }
-    void OnPlayerDied(GameObject data)
+    void OnPlayerDied(Transform data)
     {
         gameOverText.SetActive(true);
         shouldSpawnEnemy = false;
     }
-    void OnPlayerHit(GameObject data)
+    void OnPlayerHit(Transform data)
     {
         Instantiate (hitSound);
     }
-    void OnAlienDied(GameObject data)
+    void OnAlienDied(Transform data)
     {
         score += 1;
         scoreText.text = "Score: " + score;
         var drop = loot.RandomDrop();
-        if (drop == null)
+        if (drop != null)
         {
-            Instantiate (drop, data.transform.position, Quaternion.identity);
+            Instantiate (drop, data.position, Quaternion.identity);
         }
     }
-    void OnBossDied(GameObject data)
+    void OnBossDied(Transform data)
     {
         score += 50;
         scoreText.text = "Score: " + score;
