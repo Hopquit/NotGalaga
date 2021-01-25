@@ -50,6 +50,8 @@ public class GameManager : MonoBehaviour
         EventBus.StartListening("AlienDied", OnAlienDied);
         EventBus.StartListening("BossDied", OnBossDied);
         EventBus.StartListening("PlayerHit", OnPlayerHit);
+        var volume = PlayerPrefs.GetFloat("volume", 0.5f);
+        PlayerPrefs.SetFloat("volume", volume);
     }
     void OnPlayerDied(Transform data)
     {
